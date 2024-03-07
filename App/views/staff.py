@@ -25,7 +25,7 @@ def get_login_page():
 def get_calendar_page():
     return render_template('index.html')        
  
-# Retrieves info and stores it in databes ie. register new staff
+# Retrieves info and stores it in database ie. register new staff
 @staff_views.route('/register', methods=['POST'])
 def register_staff_action():
     if request.method == 'POST':
