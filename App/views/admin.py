@@ -7,33 +7,35 @@ import os
 
 admin_views = Blueprint('admin_views', __name__, template_folder='../templates')
 
+# Ensures that variables are set just once on application startup!
+@admin_views.before_app_first_request
+def set_variables():
+    global semBegins
+    global semEnds
+    global semChoice
+
 # Gets Semester Details Page
 @admin_views.route('/semester', methods=['GET'])
 def get_upload_page():
     return render_template('semester.html')
 
-# Gets Course Upload Page
-@admin_views.route('/test', methods=['GET'])
+# Gets Course Listings Page
+@admin_views.route('/coursesList', methods=['GET'])
 def index():
-    return render_template('test.html')    
+    return render_template('courses.html')    
 
-# Retrieves semester details and stores it in session variables 
+# Retrieves semester details and stores it in global variables 
 @admin_views.route('/newSemester', methods=['POST'])
 def new_semester_action():
     if request.method == 'POST':
         semBegins = request.form.get('teachingBegins')
         semEnds = request.form.get('teachingEnds')
         semChoice = request.form.get('semester')
-
-        # Sessions are used instead of global variables as these are thread and web safe!
-        session['semBegins'] = semBegins
-        session['semEnds'] = semEnds
-        session['semChoice'] = semChoice
         
         # Return course upload page to upload cvs file for courses offered that semester
         return render_template('test.html')  
                
-# Retrieves course details from file and stores it in database ie. store course info
+# Uploads course details file
 @admin_views.route('/uploadcourse', methods=['POST'])
 def upload_course_file():
     if request.method == 'POST':
@@ -54,7 +56,10 @@ def upload_course_file():
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(filepath)
 
-        #Include functionality to parse file and store in database!(check if course is offered in selected semester)
         return f'File uploaded successfully'
 
-
+# Retrieves course details from file and stores it in database ie. store course info         
+@admin_views.route('/parseFile', methods=['POST'])
+def parse_course_file():
+    if request.method == 'POST':
+        return render_template('courses.html') 
