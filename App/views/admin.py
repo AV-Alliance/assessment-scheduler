@@ -1,4 +1,5 @@
 from flask import Blueprint, request, jsonify, render_template, redirect, url_for
+from App.controllers import Course
 from App.database import db
 from werkzeug.utils import secure_filename
 import os
@@ -35,31 +36,31 @@ def new_semester_action():
         # Return course upload page to upload cvs file for courses offered that semester
         return render_template('test.html')  
                
-# Uploads course details file
-@admin_views.route('/uploadcourse', methods=['POST'])
+# Uploads course details file and extracts data
+@admin_views.route('/uploadcourse', methods=['GET','POST'])
 def upload_course_file():
-    if request.method == 'POST':
+    if request.method == 'POST': 
+        file = request.files['file'] 
+
         # Check if file is present
-        if 'file' not in request.files:
-            return 'No file selected!'
+        if (file.filename == ''):
+            message = 'No file selected!' 
+            return render_template('test.html', message = message) 
+        else:
+            # Secure filename
+            filename = secure_filename(file.filename)
 
-        file = request.files['file']
+            # Save file to uploads folder
+            file.save(os.path.join('App/uploads', file.filename)) 
 
-        # Check if file name is present
-        if file.filename == '':
-            return 'No selected file!'
+            # Retrieves course details from file and stores it in database ie. store course info 
+            # with open(file.filename, 'r') as file:
+            #     reader = csv.DictReader(file)
+            #     for row in reader:
+            #         #create object
+            #         new_course = addCourse(courseCode=row['course code'], courseTitle=row['title'], description=row['description'], level=row['level'], semester=row['sem'], aNum=row['aNum'])
+            #         db.session.add(new_course)  #queue changes for saving
+            #         db.session.commit()
 
-        # Secure filename
-        filename = secure_filename(file.filename)
-
-        # Save file to upload folder
-        filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-        file.save(filepath)
-
-        return f'File uploaded successfully'
-
-# Retrieves course details from file and stores it in database ie. store course info         
-@admin_views.route('/parseFile', methods=['POST'])
-def parse_course_file():
-    if request.method == 'POST':
-        return render_template('courses.html') 
+            # Return course listings!        
+            return render_template('courses.html')       
