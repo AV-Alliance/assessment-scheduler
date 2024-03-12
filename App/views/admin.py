@@ -1,17 +1,17 @@
 from flask import Blueprint, request, jsonify, render_template, redirect, url_for
-from App.controllers import Course
+from App.controllers import course
 from App.database import db
 from werkzeug.utils import secure_filename
-import os
+import os, csv
 #from flask_jwt_extended import current_user as jwt_current_user
 #from flask_jwt_extended import jwt_required
 
 admin_views = Blueprint('admin_views', __name__, template_folder='../templates')
-
+ 
 # Ensures that variables are set just once on application startup!
 @admin_views.before_app_first_request
 def set_variables():
-    global semBegins
+    global semBegins 
     global semEnds
     global semChoice
 
@@ -51,16 +51,20 @@ def upload_course_file():
             filename = secure_filename(file.filename)
 
             # Save file to uploads folder
-            file.save(os.path.join('App/uploads', file.filename)) 
+            file.save(os.path.join('App/uploads', filename)) 
 
             # Retrieves course details from file and stores it in database ie. store course info 
-            # with open(file.filename, 'r') as file:
-            #     reader = csv.DictReader(file)
-            #     for row in reader:
-            #         #create object
-            #         new_course = addCourse(courseCode=row['course code'], courseTitle=row['title'], description=row['description'], level=row['level'], semester=row['sem'], aNum=row['aNum'])
-            #         db.session.add(new_course)  #queue changes for saving
-            #         db.session.commit()
+            fpath = 'App/uploads/' + filename
+            with open(fpath, 'r') as file:
+                reader = csv.DictReader(file)
+                for row in reader:
+                    #create object
+                    if (row['sem'] == 2):
+                        new_course = course.add_Course(courseCode=row['course code'], courseTitle=row['title'], description=row['description'], level=row['level'], semester=row['sem'], aNum=row['aNum'])
+                    # else:
+                    #     message = row['course code'] + ' is not offered in Semester 2' + ' ! Please edit Course Listings.'
+                    #     return render_template('test.html', message = message)    
 
             # Return course listings!        
-            return render_template('courses.html')       
+            return render_template('courses.html')     
+    
