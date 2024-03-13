@@ -59,9 +59,8 @@ def upload_course_file():
                 reader = csv.DictReader(file)
                 for row in reader:
                     #create object
-                    if (row['sem'] == 2):
-                        new_course = course.add_Course(courseCode=row['course code'], courseTitle=row['title'], description=row['description'], level=row['level'], semester=row['sem'], aNum=row['aNum'])
-                    # else:
+                    new_course = course.add_Course(courseCode=row['course code'], courseTitle=row['title'], description=row['description'], level=row['level'], semester=row['sem'], aNum=row['aNum'])
+                    # else: ensures courses are available for semester selected
                     #     message = row['course code'] + ' is not offered in Semester 2' + ' ! Please edit Course Listings.'
                     #     return render_template('test.html', message = message)    
 

@@ -35,11 +35,12 @@ def register_staff_action():
         status = request.form.get('status')
         email = request.form.get('email')
         pwd = request.form.get('password')
-        
+         
         # Flash message
         if (firstName == '' or lastName == '' or staffID == '' or status == '' or email == '' or pwd == ''):
             return render_template('signup.html', message = 'Please enter required fields.')
         else:
             register_staff(firstName, lastName, staffID, status, email, pwd)
-            return render_template('index.html')  
+            return jsonify({"message":f" {Status} registered with id {staffID}"}) # for postman
+            # return render_template('index.html')  
            
