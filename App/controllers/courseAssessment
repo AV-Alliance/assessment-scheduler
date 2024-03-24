@@ -1,0 +1,16 @@
+from App.models import CourseAssessment
+from App.controllers import Course
+from App.database import db
+
+# def add_Assessment(courseCode, a_ID, startTime, endTime, startDate, endDate):
+#     # Check if maximum number of assessments was alr surpassed
+#     course = get_course(courseCode)
+#     aNum = db.session.query(CourseAssessment).filter(CourseAssessment.courseCode == courseCode).count()
+
+#     if aNum > (): 
+#         return course
+#     else:
+#          #Add new Course
+#         newCourse = Course.addCourse(courseCode, courseTitle, description, level, semester, aNum)
+#         return newCourse
+#     return None  
