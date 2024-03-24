@@ -53,18 +53,9 @@ def register_staff_action():
 @staff_views.route('/account', methods=['GET'])
 def get_account_page():
     courses=list_Courses()
-    return render_template('account.html', courses=courses)      
+    return render_template('account.html', courses=courses)        
 
-# @staff_views.route('/account', methods=['POST'])
-# def get_selected_courses():
-#     if request.method == 'POST':
-
-#     courses=list_Courses()
-#     return render_template('account.html', courses=courses)    
-
-#Gets assessments page
+#Gets assessments page (lists all assessments created for the courses assigned to staff)
 @staff_views.route('/assessments', methods=['GET'])
 def get_assessments_page():
     return render_template('assessments.html')      
-
-#hi, this is a test commit

@@ -134,7 +134,6 @@ def delete_course_action(courseCode):
     if request.method == 'POST':
         course = get_course(courseCode) # Gets selected course
         delete_Course(course)
-        print(courseCode, " deleted")
 
     # Redirect to view course listings!   
     # return redirect(url_for('admin_views.get_courses'))    
