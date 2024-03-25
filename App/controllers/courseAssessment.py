@@ -1,4 +1,5 @@
 from App.models import CourseAssessment
+from App.controllers import get_course
 from App.database import db
 
 def add_Assessment(courseCode, a_ID, startTime, endTime, startDate, endDate):
@@ -17,3 +18,6 @@ def add_Assessment(courseCode, a_ID, startTime, endTime, startDate, endDate):
         newCourse = CourseAssessment.addCourseAsg(courseCode, courseTitle, description, level, semester, aNum)
         return newCourse
     return None  
+
+def update_Assessment(courseCode, a_ID, startTime, endTime, startDate, endDate):
+    return none    

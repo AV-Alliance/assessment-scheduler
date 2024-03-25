@@ -129,7 +129,7 @@ def update_course():
     return jsonify({"message":f" {courseCode} successfully updated."}), 200 # for postman 
 
 # Selects course and removes it from database
-@admin_views.route("/deleteCourse/<string:courseCode>", methods=["POST"])
+@admin_views.route("/deleteCourse/<string:courseCode>", methods=['POST'])
 def delete_course_action(courseCode):
     if request.method == 'POST':
         course = get_course(courseCode) # Gets selected course
@@ -137,5 +137,5 @@ def delete_course_action(courseCode):
 
     # Redirect to view course listings!   
     # return redirect(url_for('admin_views.get_courses'))    
-    return jsonify({"message":f" {courseCode} successfully delete from course listings."}), 200 # for postman
+    return jsonify({"message":f" {courseCode} successfully deleted from course listings."}), 200 # for postman
 
