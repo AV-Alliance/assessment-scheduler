@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify, render_template
-from App.controllers import CourseAssessment
+from App.controllers import courseAssessment
 
 asg_views = Blueprint('asg_views', __name__, template_folder='../templates')
 
@@ -24,7 +24,7 @@ def add_asg_action():
         startDate = request.form.get('startDate')
         endTime = request.form.get('endTime')
          
-        courseAsg = addCourseAsg(courseCode, a_ID, startTime, endTime, startDate, endDate)
+        courseAsg = add_Assessment(courseCode, a_ID, startTime, endTime, startDate, endDate)
 
         # Redirect to view assignment listings!  
         # return redirect(url_for('asg_views.assessments')) 
