@@ -1,4 +1,70 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
+=======
+{% extends "layout.html" %}
+
+{% block title %}Add Assessment{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="../static/css/addAssessment.css">
+{% endblock %}
+
+{% block content %}
+
+<div class="formContainer">
+    <form id="addAssessmentForm" action="">
+        <div class="formTitle">
+            <h2>Add Assessment</h2>
+        </div>
+        <div class="formSection1">
+            <div class="formInputContainer">
+                <label for="myCourses">My Courses</label>
+                <select id="dropdownCourses" name="myCourses">
+                    <option value="COMP1601">COMP 1601</option>
+                    <option value="COMP2606">COMP 2606</option>
+                    <option value="INFO3604">INFO 3604</option>
+                </select>
+            </div>
+            <div class="formInputContainer">
+                <label for="">Assessment Type</label>
+                <select id="dropdownAssessments" name="AssessmentType">
+                    <option value="Assignment">Assignment</option>
+                    <option value="test">Coursework Exam</option>
+                    <option value="LabExam">Lab Exam</option>
+                </select>
+            </div>
+        </div>
+        <div class="bottomForm">
+            <div class="formSection2">
+                <div class="formInputContainer">
+                    <label for="">Assessment Start Time</label>
+                    <input type="time" id="startTime" name="startTime">
+                </div>
+                <div class="formInputContainer">
+                    <label for="">Assessment Start Date</label>
+                    <input type="date" id="startDate" name="startDate">
+                </div>
+            </div>
+            <div class="formSection3" id="sectionToHide">
+                <div class="formInputContainer">
+                    <label for="">Assessment End Time</label>
+                    <input type="time" id="endTime" name="endTime">
+                </div>
+                <div class="formInputContainer">
+                    <label for="">Assessment end Date</label>
+                    <input type="date" id="endDate" name="endDate">
+                </div>
+            </div>
+        </div>
+        <button id="addAssessmentBtn" type="submit">Save</button>
+    </form>
+</div>
+
+
+{% endblock %}
+
+<!-- <!DOCTYPE html>
+>>>>>>> 8daca743a805fe350d8ff8266ba76ae4abcfb768
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,7 +74,10 @@
     <link rel="stylesheet" href="../static/css/addAssessment.css">
 </head>
 <body>
+<<<<<<< HEAD
     <!-- from layout file -->
+=======
+>>>>>>> 8daca743a805fe350d8ff8266ba76ae4abcfb768
     <nav id="layout_nav">
         <div class="main_nav_wrapper">
             <div class="logo_container">
@@ -46,7 +115,10 @@
         </div>
     </nav>
 
+<<<<<<< HEAD
 <!-- site body -->
+=======
+>>>>>>> 8daca743a805fe350d8ff8266ba76ae4abcfb768
 <div class="formContainer">
     <form id="addAssessmentForm" action="">
         <div class="formTitle">
@@ -103,4 +175,8 @@
 <script src="../static/js/mobileMenu.js"></script>
 
 
+<<<<<<< HEAD
 </html>
+=======
+</html> -->
+>>>>>>> 8daca743a805fe350d8ff8266ba76ae4abcfb768

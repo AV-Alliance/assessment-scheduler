@@ -33,7 +33,12 @@ assessments.forEach(assessment => {
     // Create the card element
     const card = document.createElement('div');
     card.classList.add('card');
+<<<<<<< HEAD
 
+=======
+    card.setAttribute('data-course-code', assessment.code);
+    
+>>>>>>> 8daca743a805fe350d8ff8266ba76ae4abcfb768
     // Create elements for course details, assessment info, and actions
     const courseDetails = document.createElement('div');
     courseDetails.classList.add('course-details');
