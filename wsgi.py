@@ -3,7 +3,7 @@ from flask import Flask
 from flask.cli import with_appcontext, AppGroup
 from App.database import db, get_migrate
 from App.main import create_app
-from App.models import Staff, Course, Assessment
+from App.models import Staff, Course, Assessment, CourseStaff, CourseAssessment
 from App.controllers import Course
 
 from App.controllers.course import (
