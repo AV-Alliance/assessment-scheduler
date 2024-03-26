@@ -1,29 +1,41 @@
 a1={
     code:'COMP1601',
     type:'Assignment',
-    duration:'120',
-    details:'',
-    weight:'15'
+    start_date:'23/10/2023',
+    start_time:'11:00 PM',
+    end_date:'29/10/2023',
+    end_time:'11:00PM'
 }
 
 a2={
     code:'COMP1601',
-    type:'Exam',
-    duration:'120',
-    details:'Written exam - FST113',
-    weight:'25'
+    type:'Assignment',
+    start_date:'23/11/2023',
+    start_time:'11:00 PM',
+    end_date:'29/11/2023',
+    end_time:'11:00PM'
 }
 
 a3={
     code:'COMP1603',
-    type:'Presentation',
-    duration:'120',
-    details:'DCIT Conference room',
-    weight:'12'
+    type:'Assignment',
+    start_date:'03/12/2023',
+    start_time:'11:00 PM',
+    end_date:'03/12/2023',
+    end_time:'11:00PM'
+}
+
+a4={
+    code:'COMP1603',
+    type:'Exam',
+    start_date:'23/01/2024',
+    start_time:'11:00 PM',
+    end_date:'23/01/2024',
+    end_time:'11:00PM'
 }
 
 
-assessments=[a1,a2,a3]
+assessments=[a1,a2,a3,a4]
 const cardContainer = document.getElementById('card_container');
 
 assessments.forEach(assessment => {
@@ -55,26 +67,19 @@ assessments.forEach(assessment => {
     assessmentType.classList.add('assessment-type');
     assessmentType.textContent = assessment.type;
 
-    const durationLabel = document.createElement('p');
-    durationLabel.classList.add('card-label');
-    durationLabel.textContent = 'Duration';
-    const duration = document.createElement('p');
-    duration.classList.add('duration');
-    duration.textContent = assessment.duration+" mins";
+    const startDateLabel = document.createElement('p');
+    startDateLabel.classList.add('card-label');
+    startDateLabel.textContent = 'Start Date';
+    const startDate = document.createElement('p');
+    startDate.classList.add('start-date');
+    startDate.textContent = assessment.start_date+" - "+assessment.start_time;
 
-    const detailsLabel = document.createElement('p');
-    detailsLabel.classList.add('card-label');
-    detailsLabel.textContent = 'Details';
-    const details = document.createElement('p');
-    details.classList.add('details');
-    details.textContent = assessment.details;
-
-    const weightLabel = document.createElement('p');
-    weightLabel.classList.add('card-label');
-    weightLabel.textContent = 'Weight';
-    const weight = document.createElement('p');
-    weight.classList.add('weight');
-    weight.textContent = assessment.weight+"%";
+    const endDateLabel = document.createElement('p');
+    endDateLabel.classList.add('card-label');
+    endDateLabel.textContent = 'End Date';
+    const endDate = document.createElement('p');
+    endDate.classList.add('end-date');
+    endDate.textContent = assessment.end_date+" - "+assessment.end_time;
 
     // Create action links (modify and delete can be replaced with actual functionality)
     const modifyLink = document.createElement('button');
@@ -92,12 +97,10 @@ assessments.forEach(assessment => {
     courseDetails.appendChild(courseCode);
     assessmentInfo.appendChild(courseAssessmentLabel);
     assessmentInfo.appendChild(assessmentType);
-    courseDetails.appendChild(durationLabel);
-    courseDetails.appendChild(duration);
-    assessmentInfo.appendChild(weightLabel);
-    assessmentInfo.appendChild(weight);
-    courseDetails.appendChild(detailsLabel);
-    courseDetails.appendChild(details);
+    courseDetails.appendChild(startDateLabel);
+    courseDetails.appendChild(startDate);
+    assessmentInfo.appendChild(endDateLabel);
+    assessmentInfo.appendChild(endDate);
     actions.appendChild(modifyLink);
     actions.appendChild(deleteLink);
     card.appendChild(courseDetails);

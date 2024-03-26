@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify, render_template
-from App.controllers import courseAssessment, assessment
+from App.controllers import courseAssessment, assessment, Staff
 
 from App.controllers.courseAssessment import (
     add_Assessment
@@ -9,18 +9,24 @@ from App.controllers.assessment import (
     list_assessment_types
 )
 
+from App.controllers.staff import(
+    get_registered_courses
+)
+
 asm_views = Blueprint('asm_views', __name__, template_folder='../templates')
 
 #Gets assessments page (lists all assessments created for the courses assigned to staff)
 @asm_views.route('/assessments', methods=['GET'])
 def get_assessments_page():
-    return render_template('assessments.html') 
+    registered_courses=get_registered_courses(123)
+    return render_template('assessments.html', courses=registered_courses)      
 
 # Gets Add Assessment Page
 @asm_views.route('/new_asm', methods=['GET'])
 def new_asg_page():
     types = list_assessment_types()
-    return render_template('addAssessment.html', types=types)
+    registered=get_registered_courses(123)
+    return render_template('addAssessment.html', types=types, courses=registered)
 
 # Retrieves course, asg info and stores it in database ie. add new assessment to course
 @asm_views.route('/addNewAsm', methods=['POST'])
@@ -31,13 +37,13 @@ def add_asg_action():
         startTime = request.form.get('startTime')
         endTime = request.form.get('endTime')
         startDate = request.form.get('startDate')
-        endDate = request.form.get('endTime')
-         
+        endDate = request.form.get('endDate')
+        print(course, asgType, startTime, endTime, startDate, endDate)
         courseAsg = add_Assessment(course, asgType, startTime, endTime, startDate, endDate)
 
         # Redirect to view assignment listings!  
         # return redirect(url_for('asm_views.assessments')) 
-        return jsonify({"message":f" New assessment for {courseCode} successfully added."}), 200  #for postman
+        return jsonify({"message":f" New assessment for {course} successfully added."}), 200  #for postman
 
 # Gets Update Assessment page
 @asm_views.route('/modifyAsg/<string:ca_ID>', methods=['GET'])
