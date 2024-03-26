@@ -3,8 +3,9 @@ from App.database import db
 class CourseAssessment(db.Model):
     __tablename__ = 'courseAssessment'
 
-    courseCode = db.Column(db.String(8), db.ForeignKey('course.courseCode'), primary_key= True, nullable = False)
-    a_ID = db.Column(db.Integer, db.ForeignKey('assessment.a_ID'), primary_key= True, nullable = False)
+    ca_ID = db.Column(db.String(9), primary_key=True)
+    courseCode = db.Column(db.String(8), db.ForeignKey('course.courseCode'), nullable = False)
+    a_ID = db.Column(db.Integer, db.ForeignKey('assessment.a_ID'), nullable = False)
     startDate = db.Column(db.Date, nullable = False)
     endDate = db.Column(db.Date, nullable = False)
     startTime = db.Column(db.Time, nullable = False)
@@ -16,6 +17,7 @@ class CourseAssessment(db.Model):
     # weight = db.Column(db.Integer, nullable = False)
 
     def __init__(self, courseCode, a_ID, startTime, endTime, startDate, endDate):
+        self.ca_ID = "A" + str(CourseAssessment.query.count() + 1) #auto increment count
         self.courseCode = courseCode
         self.a_ID = a_ID
         self.startTime = startTime
@@ -25,6 +27,7 @@ class CourseAssessment(db.Model):
 
     def to_json(self):
         return {
+            "courseAssessmentNum" : self.ca_ID,
             "courseCode" : self.courseCode,
             "a_ID" : self.a_ID,
             "startTime" : self.startTime,
@@ -34,9 +37,9 @@ class CourseAssessment(db.Model):
     }
 
     #Add new assessment to course
-    def addCourseAsg(self, courseCode, a_ID, startTime, endTime, startDate, endDate):
-        newAsg = CourseAssessment(courseCode, a_ID, startTime, endTime, startDate, endDate)
-        db.session.add(newAsg)  #add to db
+    def addCourseAsm(self, courseCode, a_ID, startTime, endTime, startDate, endDate):
+        newAsm = CourseAssessment(courseCode, a_ID, startTime, endTime, startDate, endDate)
+        db.session.add(newAsm)  #add to db
         db.session.commit()
         return newCourse
     

@@ -11,7 +11,7 @@ class Category(enum.Enum):
     ORALEXAM = "Oral Exam"
     PARTICIPATION = "Participation"
 
-class assessment(db.Model):
+class Assessment(db.Model):
     __tablename__ = 'assessment'
 
     a_ID = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True)

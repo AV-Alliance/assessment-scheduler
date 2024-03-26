@@ -3,7 +3,7 @@ from flask import Flask
 from flask.cli import with_appcontext, AppGroup
 from App.database import db, get_migrate
 from App.main import create_app
-from App.models import Staff, Course
+from App.models import Staff, Course, Assessment
 from App.controllers import Course
 
 from App.controllers.course import (
@@ -24,6 +24,48 @@ def initialize():
   db.session.commit()
   print(bob)
   print('database initialized')
+
+# This command initializes the database with the Assessment type info 
+@app.cli.command("asm", help="Creates and initializes the database")
+def initialize_asm_types():
+  db.drop_all()
+  db.create_all()
+  type1 = Assessment(1, "EXAM")
+  type2 = Assessment(2, "Assignment")
+  type3 = Assessment(3, "Quiz")
+  type4 = Assessment(4, "Project")
+  type5 = Assessment(5, "Debate")
+  type6 = Assessment(6, "Presentation")
+  type7 = Assessment(7, "Oral Exam")
+  type8 = Assessment(8, "Participation")
+
+  db.session.add(type1)
+  db.session.commit()
+
+  db.session.add(type2)
+  db.session.commit()
+
+  db.session.add(type3)
+  db.session.commit()
+
+  db.session.add(type4)
+  db.session.commit()
+
+  db.session.add(type5)
+  db.session.commit()
+
+  db.session.add(type6)
+  db.session.commit()
+
+  db.session.add(type7)
+  db.session.commit()
+
+  db.session.add(type8)
+  db.session.commit()
+
+  types = Assessment.query.all()
+  print(types)
+  print('assessments added')
 
 # This command retrieves all staff objects
 @app.cli.command('get-users')
