@@ -39,7 +39,7 @@ def add_asg_action():
         startDate = request.form.get('startDate')
         endDate = request.form.get('endDate')
         print(course, asgType, startTime, endTime, startDate, endDate)
-        courseAsg = add_Assessment(course, asgType, startTime, endTime, startDate, endDate)
+        # courseAsg = add_Assessment(course, asgType, startTime, endTime, startDate, endDate)
 
         # Redirect to view assignment listings!  
         # return redirect(url_for('asm_views.assessments')) 
