@@ -12,14 +12,14 @@ def login_staff_action():
     password = request.form.get('password')
     user = db.session.query(Staff).filter(Staff.email==email).first()
     if user == None:
-        user = db.session.query(Admin).filter(Admin.u_ID==email).first()
+        user = db.session.query(Admin).filter(Admin.email==email).first()
         if user!=None:
             if login_admin(email, password):
-                return user, 'Login Successful' , 200
+                return 'Login Successful', 200
             else:
                 return 'Login Failed' , 401
     else:
         if login_staff(email, password):
-            return 'Login Successful' , 200
+            return 'Login Successful', 200
         else:
             return 'Login Failed' , 401

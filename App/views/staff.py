@@ -16,7 +16,6 @@ from App.controllers.course import (
     list_Courses
 )
 
-
 from App.controllers.course import (
     list_Courses
 )
@@ -55,26 +54,21 @@ def register_staff_action():
         else:
             register_staff(firstName, lastName, staffID, status, email, pwd)
             return render_template('index.html')  
-<<<<<<< HEAD
-           
-=======
 
           
             # return jsonify({"message":f" {status} registered with id {staffID}"}), 200 # for postman
     
->>>>>>> 8daca743a805fe350d8ff8266ba76ae4abcfb768
 #Gets account page
 @staff_views.route('/account', methods=['GET'])
 def get_account_page():
     courses=list_Courses()
     return render_template('account.html', courses=courses)      
 
-<<<<<<< HEAD
 #Gets assessments page
 @staff_views.route('/assessments', methods=['GET'])
 def get_assessments_page():
     return render_template('assessments.html')   
-=======
+
 @staff_views.route('/account', methods=['POST'])
 def get_selected_courses():
     courses=list_Courses()
@@ -86,12 +80,6 @@ def get_selected_courses():
             print(code)
             #add course to course-staff table
     return render_template('account.html', courses=courses)    
-
-#Gets assessments page
-@staff_views.route('/assessments', methods=['GET'])
-def get_assessments_page():
-    return render_template('assessments.html')      
-
+  
 #hi, this is a test commit
 
->>>>>>> 8daca743a805fe350d8ff8266ba76ae4abcfb768
