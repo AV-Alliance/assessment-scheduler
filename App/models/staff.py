@@ -17,7 +17,6 @@ class Staff(User,UserMixin):
   __tablename__ = 'staff'
   fName = db.Column(db.String(120), nullable=False)
   lName = db.Column(db.String(120), nullable=False)
-  email = db.Column(db.String(120), nullable=False)
   cNum = db.Column(db.Integer, nullable=False, default=0) #changes depending on status
   status = db.Column(db.Enum(Status), nullable = False) #defines the contract position of a teaching staff member
   #creates reverse relationship from Staff back to Course to access courses assigned to a specific lecturer
