@@ -83,8 +83,3 @@ def login_required(required_class):
     return decorated_function
 
   return wrapper
-
-
-
-
-
