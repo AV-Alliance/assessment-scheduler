@@ -22,5 +22,13 @@ class User(db.Model, UserMixin):
         """Check hashed password."""
         return check_password_hash(self.password, password)
     
+    def to_json(self):
+	    return {
+            "u_ID": self.u_ID,
+            "password": self.password,
+            "email":self.email
+        }
+        
+    
     # def __str__(self):
     #     return f"Staff(id={self.u_ID}, email={self.email})"

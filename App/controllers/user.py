@@ -1,3 +1,5 @@
+from flask import jsonify
+from flask_jwt_extended import create_access_token, set_access_cookies
 from App.models import User, Admin, Staff
     
 
@@ -22,3 +24,12 @@ def get_user(email, password):
     if user !=None:
         return user
     return None
+
+def login_user(email, password):
+  user = User.query.filter_by(email=email).first()
+  if user and user.check_password(password):
+    token = create_access_token(identity=email)
+    response = jsonify(access_token=token)
+    set_access_cookies(response, token)
+    return response
+  return jsonify(message="Invalid username or password"), 401

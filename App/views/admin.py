@@ -102,7 +102,7 @@ def add_course_action():
         #return redirect(url_for('admin_views.get_courses')) 
         return jsonify({"message":f" {courseCode} successfully added to course listings."}), 200  #for postman
 
-# Get selectec course
+# Get selected course
 # @admin_views.route('/selectedCourse', methods=['GET'])
 # def get_selected_course():
 
