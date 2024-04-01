@@ -1,4 +1,5 @@
 from App.database import db
+from App.models import assessment
 
 class Course(db.Model):
   __tablename__ = 'course'
@@ -10,7 +11,7 @@ class Course(db.Model):
   semester = db.Column(db.Integer, nullable=False)
   aNum = db.Column(db.Integer, nullable=False, default=0)
   # creates reverse relationship from Course back to Assessment to access assessments for a specific course
-  assessmentsAssigned = db.relationship('assessment', backref=db.backref('assessment', lazy='joined'))
+  assessmentsAssigned = db.relationship('assessment', secondary='courseAssessment', backref=db.backref('assessment', lazy='joined'))
 
   def __init__(self, courseCode, courseTitle, description, level, semester, aNum):
     self.courseCode = courseCode

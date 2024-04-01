@@ -6,7 +6,7 @@ class Programme(db.Model):
   p_ID = db.Column(db.Integer, primary_key = True)
   p_name = db.Column(db.String(100), nullable = False)
   # creates reverse relationship from Programme back to Course to access courses within a programme
-  coursesAssigned = db.relationship('course', backref=db.backref('course', lazy='joined'))
+  # coursesAssigned = db.relationship('course', backref=db.backref('course', lazy='joined'))
 
   def __init__(self, p_ID, name):
     self.p_ID = p_ID

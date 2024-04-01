@@ -71,7 +71,7 @@ def register_staff_action():
             return render_template('signup.html', message = 'Please enter required fields.')
         else:
             register_staff(firstName, lastName, staffID, status, email, pwd)
-            return render_template('login.html')  
+            return render_template('index.html')  
 
 #Gets account page
 @staff_views.route('/account', methods=['GET'])
