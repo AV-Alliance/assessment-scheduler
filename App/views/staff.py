@@ -14,7 +14,6 @@ from App.controllers.staff import (
     get_registered_courses,
 )
 
-
 from App.controllers.course import (
     list_Courses
 )
@@ -50,7 +49,7 @@ def get_calendar_page():
                 {'courseCode':'COMP1601','a_ID':'Exam','caNum':'2','startDate':'29-02-2024','endDate':'29-02-2024','startTime':'9:00','endTime':'9:00'},
                 {'courseCode':'COMP1600','a_ID':'Exam','caNum':'3','startDate':'29-02-2024','endDate':'29-02-2024','startTime':'9:00','endTime':'9:00'}]
    
-    
+     
 
     # for c in courses:
     #     print(c.courseCode)
