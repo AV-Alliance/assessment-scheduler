@@ -9,12 +9,8 @@ class Course(db.Model):
   level = db.Column(db.Integer, nullable=False)
   semester = db.Column(db.Integer, nullable=False)
   aNum = db.Column(db.Integer, nullable=False, default=0)
-  # preReqs = db.Column(db.ForeignKey('course.courseCode'))
-  # Relationship between a course and programmes to define which programmes a course belongs to
-  p_ID = db.Column(db.Integer, db.ForeignKey('programme.p_ID')) # nullable = False
   # creates reverse relationship from Course back to Assessment to access assessments for a specific course
-  # assessmentsAssigned = db.relationship('assessment', backref=db.backref('assessment', lazy='joined'))
-  # staffAssigned = db.Column(db.ForeignKey('staff.u_ID'))
+  assessmentsAssigned = db.relationship('assessment', backref=db.backref('assessment', lazy='joined'))
 
   def __init__(self, courseCode, courseTitle, description, level, semester, aNum):
     self.courseCode = courseCode
@@ -26,12 +22,12 @@ class Course(db.Model):
 
   def to_json(self):
     return {
-      "courseCode" : self.courseCode,
-      "courseTitle" : self.courseTitle,
-      "description" : self.description,
-      "level" : self.level,
-      "semester" : self.semester,
-      "aNum" : self.aNum,
+      "courseCode": self.courseCode,
+      "courseTitle": self.courseTitle,
+      "description": self.description,
+      "level": self.level,
+      "semester": self.semester,
+      "aNum": self.aNum,
     }
 
   #Add new Course
