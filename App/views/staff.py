@@ -73,9 +73,6 @@ def register_staff_action():
             register_staff(firstName, lastName, staffID, status, email, pwd)
             return render_template('login.html')  
 
-          
-            # return jsonify({"message":f" {status} registered with id {staffID}"}), 200 # for postman
-    
 #Gets account page
 @staff_views.route('/account', methods=['GET'])
 @jwt_required()
@@ -116,6 +113,11 @@ def get_assessments_page():
 def get_add_assessments_page():
     registered_courses=get_registered_courses(123)
     return render_template('addAssessment.html', courses=registered_courses)   
+
+@staff_views.route('/addAssessment', methods=['POST'])
+def add_assessments_action():
+    # registered_courses=get_registered_courses(123)
+    return render_template('addAssessment.html', courses=registered_courses)       
 
 @staff_views.route('/modifyAssessment/<string:caNum>', methods=['GET'])
 def get_modify_assessments_page(caNum):
