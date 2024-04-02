@@ -3,6 +3,7 @@ from flask_login import current_user
 from App.controllers import Staff
 from App.controllers import Course
 from App.database import db
+from App.models import courseAssessment
 import json
 from flask_jwt_extended import current_user as jwt_current_user, get_jwt_identity
 from flask_jwt_extended import jwt_required
@@ -13,7 +14,6 @@ from App.controllers.staff import (
     add_CourseStaff,
     get_registered_courses,
 )
-
 
 from App.controllers.course import (
     list_Courses
@@ -50,7 +50,7 @@ def get_calendar_page():
                 {'courseCode':'COMP1601','a_ID':'Exam','caNum':'2','startDate':'29-02-2024','endDate':'29-02-2024','startTime':'9:00','endTime':'9:00'},
                 {'courseCode':'COMP1600','a_ID':'Exam','caNum':'3','startDate':'29-02-2024','endDate':'29-02-2024','startTime':'9:00','endTime':'9:00'}]
    
-    
+     
 
     # for c in courses:
     #     print(c.courseCode)
@@ -68,15 +68,12 @@ def register_staff_action():
         pwd = request.form.get('password')
          
         # Flash message
-        if (firstName == '' or lastName == '' or staffID == '' or status == '' or email == '' or pwd == ''):
-            return render_template('signup.html', message = 'Please enter required fields.')
-        else:
-            register_staff(firstName, lastName, staffID, status, email, pwd)
-            return render_template('login.html')  
+        # if (firstName == '' or lastName == '' or staffID == '' or status == '' or email == '' or pwd == ''):
+        #     return render_template('signup.html', message = 'Please enter required fields.')
+        # else:
+        register_staff(firstName, lastName, staffID, status, email, pwd)
+        return render_template('index.html')  
 
-          
-            # return jsonify({"message":f" {status} registered with id {staffID}"}), 200 # for postman
-    
 #Gets account page
 @staff_views.route('/account', methods=['GET'])
 @jwt_required()
@@ -113,9 +110,26 @@ def get_assessments_page():
                 {'courseCode':'COMP1602','a_ID':'Assignment','caNum':'3','startDate':'29-02-2024','endDate':'29-02-2024','startTime':'9:00','endTime':'9:00'}]
     return render_template('assessments.html', courses=registered_courses, assessments=assessments)      
 
+#Gets Add Assessments page
 @staff_views.route('/addAssessment', methods=['GET'])
 def get_add_assessments_page():
     return render_template('addAssessment.html')   
+
+# Retrieves assessment info and creates new assessment for course
+@staff_views.route('/addAssessment', methods=['POST'])
+def add_assessments_action():
+    registered_courses=get_registered_courses(123)
+    course = request.form.get('myCourses')
+    asmType = request.form.get('AssessmentType')
+    startDate = request.form.get('startDate')
+    endDate = request.form.get('endDate')
+    startTime = request.form.get('startTime')
+    endTime = request.form.get('endTime')
+    
+    if course in registered_courses:
+        newAsm = courseAssessment.addCourseAsg(courseCode, a_ID, startDate, endDate, startTime, endTime)  
+
+    return redirect(url_for('staff_views.get_calendar_page'))      
 
 @staff_views.route('/modifyAssessment/<string:caNum>', methods=['GET'])
 def get_modify_assessments_page(caNum):
