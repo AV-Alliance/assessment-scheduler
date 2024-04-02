@@ -86,6 +86,8 @@ assessments.forEach(assessment => {
     // Append elements to their respective parents
     courseDetails.appendChild(courseCodeLabel);
     courseDetails.appendChild(courseCode);
+    courseDetails.appendChild(courseTitleLabel);
+    courseDetails.appendChild(courseName);
     assessmentInfo.appendChild(courseAssessmentLabel);
     assessmentInfo.appendChild(assessmentType);
     assessmentInfo.appendChild(caNumLabel);

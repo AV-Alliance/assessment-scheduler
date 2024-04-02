@@ -115,8 +115,7 @@ def get_assessments_page():
 
 @staff_views.route('/addAssessment', methods=['GET'])
 def get_add_assessments_page():
-    registered_courses=get_registered_courses(123)
-    return render_template('addAssessment.html', courses=registered_courses)   
+    return render_template('addAssessment.html')   
 
 @staff_views.route('/modifyAssessment/<string:caNum>', methods=['GET'])
 def get_modify_assessments_page(caNum):
